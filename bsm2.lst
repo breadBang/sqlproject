@@ -1,0 +1,169 @@
+
+<4>
+HR@orcl>SELECT last_name,hire_date,TO_CHAR(hire_date, 'DAY') DAY
+  2  	FROM employees
+  3  	ORDER BY TO_CHAR(hire_date -1,'d');
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ------------------------------------                                                
+Dean                      02-MAR-99 MONDAY                                                                              
+Grant                     24-MAY-99 MONDAY                                                                              
+Taylor                    24-MAR-98 TUESDAY                                                                             
+Mourgos                   16-NOV-99 TUESDAY                                                                             
+Gietz                     07-JUN-94 TUESDAY                                                                             
+Raphealy                  02-MAR-99 TUESDAY                                                                             
+Rajs                      17-OCT-95 TUESDAY                                                                             
+Ernst                     21-MAY-91 TUESDAY                                                                             
+Higgins                   07-JUN-94 TUESDAY                                                                             
+Davies                    29-JAN-97 WEDNESDAY                                                                           
+De Haan                   13-JAN-93 WEDNESDAY                                                                           
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ------------------------------------                                                
+King                      17-JUN-87 WEDNESDAY                                                                           
+Hunold                    03-JAN-90 WEDNESDAY                                                                           
+Whalen                    17-SEP-87 THURSDAY                                                                            
+Vargas                    09-JUL-98 THURSDAY                                                                            
+Popp                      25-JAN-18 THURSDAY                                                                            
+Kochhar                   21-SEP-89 THURSDAY                                                                            
+Abel                      11-MAY-96 SATURDAY                                                                            
+Zlotkey                   29-JAN-00 SATURDAY                                                                            
+Hartstein                 17-FEB-96 SATURDAY                                                                            
+Fay                       17-AUG-97 SUNDAY                                                                              
+Matos                     15-MAR-98 SUNDAY                                                                              
+
+LAST_NAME                 HIRE_DATE DAY                                                                                 
+------------------------- --------- ------------------------------------                                                
+Lorentz                   07-FEB-99 SUNDAY                                                                              
+
+23 rows selected.
+
+
+<5>
+HR@orcl>SELECT last_name,NVL(TO_CHAR(commission_pct),'No Commission') COMM
+  2  FROM employees;
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+King                      No Commission                                                                                 
+Kochhar                   No Commission                                                                                 
+De Haan                   No Commission                                                                                 
+Hunold                    No Commission                                                                                 
+Ernst                     No Commission                                                                                 
+Lorentz                   No Commission                                                                                 
+Mourgos                   No Commission                                                                                 
+Rajs                      No Commission                                                                                 
+Davies                    No Commission                                                                                 
+Matos                     No Commission                                                                                 
+Vargas                    No Commission                                                                                 
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Zlotkey                   .2                                                                                            
+Abel                      .3                                                                                            
+Taylor                    .2                                                                                            
+Grant                     .15                                                                                           
+Whalen                    No Commission                                                                                 
+Hartstein                 No Commission                                                                                 
+Fay                       No Commission                                                                                 
+Higgins                   No Commission                                                                                 
+Gietz                     No Commission                                                                                 
+Raphealy                  .2                                                                                            
+Dean                      .2                                                                                            
+
+LAST_NAME                 COMM                                                                                          
+------------------------- ----------------------------------------                                                      
+Popp                      No Commission                                                                                 
+
+23 rows selected.
+
+
+<6>
+HR@orcl>
+  1  SELECT rpad(last_name,8)||' '|| rpad(' ',salary/1000+1,'*')
+  2  EMPLOYEES_AND_THEIR_SALARIES
+  3  FROM employees
+  4* ORDER BY salary DESC
+HR@orcl>/
+
+EMPLOYEES_AND_THEIR_SALARIES                                                                                            
+------------------------------------------------------------------------------------------------------------------------
+King      *************************                                                                                     
+Kochhar   *****************                                                                                             
+De Haan   *****************                                                                                             
+Hartstei  ***************                                                                                               
+Abel      ************                                                                                                  
+Higgins   ************                                                                                                  
+Popp      ************                                                                                                  
+Zlotkey   ************                                                                                                  
+Dean      ***********                                                                                                   
+Raphealy  ***********                                                                                                   
+Taylor    *********                                                                                                     
+
+EMPLOYEES_AND_THEIR_SALARIES                                                                                            
+------------------------------------------------------------------------------------------------------------------------
+Hunold    *********                                                                                                     
+Gietz     ********                                                                                                      
+Grant     *******                                                                                                       
+Fay       ******                                                                                                        
+Ernst     ******                                                                                                        
+Mourgos   ******                                                                                                        
+Whalen    ****                                                                                                          
+Lorentz   ****                                                                                                          
+Rajs      ***                                                                                                           
+Davies    ***                                                                                                           
+Matos     **                                                                                                            
+
+EMPLOYEES_AND_THEIR_SALARIES                                                                                            
+------------------------------------------------------------------------------------------------------------------------
+Vargas    **                                                                                                            
+
+23 rows selected.
+
+<7>
+HR@orcl>
+  1  SELECT last_name,job_id,
+  2  		CASE job_id WHEN 'AD_PRES' THEN 'A'
+  3  			    WHEN 'ST_MAN' THEN 'B'
+  4  			    WHEN 'IT_PROG' THEN 'C'
+  5  			    WHEN 'SA_REP' THEN 'D'
+  6  			    WHEN 'ST_CLERK' THEN 'E'
+  7  		ELSE '0' END GRADE
+  8* FROM employees
+  9  /
+
+LAST_NAME                 JOB_ID     G                                                                                  
+------------------------- ---------- -                                                                                  
+Abel                      SA_REP     D                                                                                  
+Davies                    ST_CLERK   E                                                                                  
+De Haan                   AD_VP      0                                                                                  
+Dean                      SA_REP     D                                                                                  
+Ernst                     IT_PROG    C                                                                                  
+Fay                       MK_REP     0                                                                                  
+Gietz                     AC_ACCOUNT 0                                                                                  
+Grant                     SA_REP     D                                                                                  
+Hartstein                 MK_MAN     0                                                                                  
+Higgins                   AC_MGR     0                                                                                  
+Hunold                    IT_PROG    C                                                                                  
+
+LAST_NAME                 JOB_ID     G                                                                                  
+------------------------- ---------- -                                                                                  
+King                      AD_PRES    A                                                                                  
+Kochhar                   AD_VP      0                                                                                  
+Lorentz                   IT_PROG    C                                                                                  
+Matos                     ST_CLERK   E                                                                                  
+Mourgos                   ST_MAN     B                                                                                  
+Popp                      AC_MGR     0                                                                                  
+Rajs                      ST_CLERK   E                                                                                  
+Raphealy                  SA_REP     D                                                                                  
+Taylor                    SA_REP     D                                                                                  
+Vargas                    ST_CLERK   E                                                                                  
+Whalen                    AD_ASST    0                                                                                  
+
+LAST_NAME                 JOB_ID     G                                                                                  
+------------------------- ---------- -                                                                                  
+Zlotkey                   SA_MAN     0                                                                                  
+
+23 rows selected.
+
+HR@orcl>spool off

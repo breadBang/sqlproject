@@ -1,0 +1,432 @@
+Practice 1
+
+<1>
+SYS@orcl>conn hr/hr
+Connected.
+
+<2>
+HR@orcl>desc departments
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ DEPARTMENT_ID                                                     NOT NULL NUMBER(4)
+ DEPARTMENT_NAME                                                   NOT NULL VARCHAR2(30)
+ MANAGER_ID                                                                 NUMBER(6)
+ LOCATION_ID                                                                NUMBER(4)
+
+HR@orcl>SELECT * FROM departments;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                     
+------------- ------------------------------ ---------- -----------                                                     
+           10 Administration                        200        1700                                                     
+           20 Marketing                             201        1800                                                     
+           50 Shipping                              124        1500                                                     
+           60 IT                                    103        1400                                                     
+           80 Sales                                 149        2500                                                     
+           90 Executive                             100        1700                                                     
+          110 Accounting                            205        1700                                                     
+          190 Contracting                                      1700                                                     
+
+8 rows selected.
+
+
+<3>
+HR@orcl>desc employees
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ EMPLOYEE_ID                                                       NOT NULL NUMBER(6)
+ FIRST_NAME                                                                 VARCHAR2(20)
+ LAST_NAME                                                         NOT NULL VARCHAR2(25)
+ EMAIL                                                             NOT NULL VARCHAR2(25)
+ PHONE_NUMBER                                                               VARCHAR2(20)
+ HIRE_DATE                                                         NOT NULL DATE
+ JOB_ID                                                            NOT NULL VARCHAR2(10)
+ SALARY                                                                     NUMBER(8,2)
+ COMMISSION_PCT                                                             NUMBER(2,2)
+ MANAGER_ID                                                                 NUMBER(6)
+ DEPARTMENT_ID                                                              NUMBER(4)
+
+HR@orcl>SELECT employee_id,last_name,job_id,hire_date STARTDATE
+  2  FROM employees;
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID     STARTDATE                                                              
+----------- ------------------------- ---------- ---------                                                              
+        100 King                      AD_PRES    17-JUN-87                                                              
+        101 Kochhar                   AD_VP      21-SEP-89                                                              
+        102 De Haan                   AD_VP      13-JAN-93                                                              
+        103 Hunold                    IT_PROG    03-JAN-90                                                              
+        104 Ernst                     IT_PROG    21-MAY-91                                                              
+        107 Lorentz                   IT_PROG    07-FEB-99                                                              
+        124 Mourgos                   ST_MAN     16-NOV-99                                                              
+        141 Rajs                      ST_CLERK   17-OCT-95                                                              
+        142 Davies                    ST_CLERK   29-JAN-97                                                              
+        143 Matos                     ST_CLERK   15-MAR-98                                                              
+        144 Vargas                    ST_CLERK   09-JUL-98                                                              
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID     STARTDATE                                                              
+----------- ------------------------- ---------- ---------                                                              
+        149 Zlotkey                   SA_MAN     29-JAN-00                                                              
+        174 Abel                      SA_REP     11-MAY-96                                                              
+        176 Taylor                    SA_REP     24-MAR-98                                                              
+        178 Grant                     SA_REP     24-MAY-99                                                              
+        200 Whalen                    AD_ASST    17-SEP-87                                                              
+        201 Hartstein                 MK_MAN     17-FEB-96                                                              
+        202 Fay                       MK_REP     17-AUG-97                                                              
+        205 Higgins                   AC_MGR     07-JUN-94                                                              
+        206 Gietz                     AC_ACCOUNT 07-JUN-94                                                              
+
+20 rows selected.
+
+HR@orcl>save lab_01_03.sql
+Created file lab_01_03.sql
+
+
+<4>
+HR@orcl>SELECT distinct job_id
+  2  from employees;
+
+JOB_ID                                                                                                                  
+----------                                                                                                              
+AC_ACCOUNT                                                                                                              
+AC_MGR                                                                                                                  
+AD_ASST                                                                                                                 
+AD_PRES                                                                                                                 
+AD_VP                                                                                                                   
+IT_PROG                                                                                                                 
+MK_MAN                                                                                                                  
+MK_REP                                                                                                                  
+SA_MAN                                                                                                                  
+SA_REP                                                                                                                  
+ST_CLERK                                                                                                                
+
+JOB_ID                                                                                                                  
+----------                                                                                                              
+ST_MAN                                                                                                                  
+
+12 rows selected.
+
+
+<5>
+HR@orcl>SELECT employee_id,last_name,job_id,hire_date STARTDATE
+  2  FROM employees
+  3  /
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID     STARTDATE                                                              
+----------- ------------------------- ---------- ---------                                                              
+        100 King                      AD_PRES    17-JUN-87                                                              
+        101 Kochhar                   AD_VP      21-SEP-89                                                              
+        102 De Haan                   AD_VP      13-JAN-93                                                              
+        103 Hunold                    IT_PROG    03-JAN-90                                                              
+        104 Ernst                     IT_PROG    21-MAY-91                                                              
+        107 Lorentz                   IT_PROG    07-FEB-99                                                              
+        124 Mourgos                   ST_MAN     16-NOV-99                                                              
+        141 Rajs                      ST_CLERK   17-OCT-95                                                              
+        142 Davies                    ST_CLERK   29-JAN-97                                                              
+        143 Matos                     ST_CLERK   15-MAR-98                                                              
+        144 Vargas                    ST_CLERK   09-JUL-98                                                              
+
+EMPLOYEE_ID LAST_NAME                 JOB_ID     STARTDATE                                                              
+----------- ------------------------- ---------- ---------                                                              
+        149 Zlotkey                   SA_MAN     29-JAN-00                                                              
+        174 Abel                      SA_REP     11-MAY-96                                                              
+        176 Taylor                    SA_REP     24-MAR-98                                                              
+        178 Grant                     SA_REP     24-MAY-99                                                              
+        200 Whalen                    AD_ASST    17-SEP-87                                                              
+        201 Hartstein                 MK_MAN     17-FEB-96                                                              
+        202 Fay                       MK_REP     17-AUG-97                                                              
+        205 Higgins                   AC_MGR     07-JUN-94                                                              
+        206 Gietz                     AC_ACCOUNT 07-JUN-94                                                              
+
+20 rows selected.
+
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT employee_id"EMP #",last_name "employee",job_id "Job",hire_date "Hire Date"
+  2* FROM employees
+HR@orcl>/
+
+     EMP # employee                  Job        Hire Date                                                               
+---------- ------------------------- ---------- ---------                                                               
+       100 King                      AD_PRES    17-JUN-87                                                               
+       101 Kochhar                   AD_VP      21-SEP-89                                                               
+       102 De Haan                   AD_VP      13-JAN-93                                                               
+       103 Hunold                    IT_PROG    03-JAN-90                                                               
+       104 Ernst                     IT_PROG    21-MAY-91                                                               
+       107 Lorentz                   IT_PROG    07-FEB-99                                                               
+       124 Mourgos                   ST_MAN     16-NOV-99                                                               
+       141 Rajs                      ST_CLERK   17-OCT-95                                                               
+       142 Davies                    ST_CLERK   29-JAN-97                                                               
+       143 Matos                     ST_CLERK   15-MAR-98                                                               
+       144 Vargas                    ST_CLERK   09-JUL-98                                                               
+
+     EMP # employee                  Job        Hire Date                                                               
+---------- ------------------------- ---------- ---------                                                               
+       149 Zlotkey                   SA_MAN     29-JAN-00                                                               
+       174 Abel                      SA_REP     11-MAY-96                                                               
+       176 Taylor                    SA_REP     24-MAR-98                                                               
+       178 Grant                     SA_REP     24-MAY-99                                                               
+       200 Whalen                    AD_ASST    17-SEP-87                                                               
+       201 Hartstein                 MK_MAN     17-FEB-96                                                               
+       202 Fay                       MK_REP     17-AUG-97                                                               
+       205 Higgins                   AC_MGR     07-JUN-94                                                               
+       206 Gietz                     AC_ACCOUNT 07-JUN-94                                                               
+
+20 rows selected.
+
+
+<6>
+HR@orcl>SELECT employee_id || ', ' || job_id "Employee and Title"
+  2  from employees;
+
+Employee and Title                                                                                                      
+----------------------------------------------------                                                                    
+206, AC_ACCOUNT                                                                                                         
+205, AC_MGR                                                                                                             
+200, AD_ASST                                                                                                            
+100, AD_PRES                                                                                                            
+101, AD_VP                                                                                                              
+102, AD_VP                                                                                                              
+103, IT_PROG                                                                                                            
+104, IT_PROG                                                                                                            
+107, IT_PROG                                                                                                            
+201, MK_MAN                                                                                                             
+202, MK_REP                                                                                                             
+
+Employee and Title                                                                                                      
+----------------------------------------------------                                                                    
+149, SA_MAN                                                                                                             
+174, SA_REP                                                                                                             
+176, SA_REP                                                                                                             
+178, SA_REP                                                                                                             
+141, ST_CLERK                                                                                                           
+142, ST_CLERK                                                                                                           
+143, ST_CLERK                                                                                                           
+144, ST_CLERK                                                                                                           
+124, ST_MAN                                                                                                             
+
+20 rows selected.
+
+Practice 2
+
+<1>
+HR@orcl>SELECT last_name, salary
+  2  from employees
+  3  WHERE salary > 12000;
+
+LAST_NAME                     SALARY                                                                                    
+------------------------- ----------                                                                                    
+King                           24000                                                                                    
+Kochhar                        17000                                                                                    
+De Haan                        17000                                                                                    
+Hartstein                      13000                                                                                    
+
+<2>
+HR@orcl>SELECT last_name, department_id
+  2  from employees
+  3  WHERE employee_id = 176;
+
+LAST_NAME                 DEPARTMENT_ID                                                                                 
+------------------------- -------------                                                                                 
+Taylor                               80                                                                                 
+
+
+<3>
+HR@orcl>SELECT last_name,salary
+  2  from employees
+  3  where salary Not Between 5000 and 12000;
+
+LAST_NAME                     SALARY                                                                                    
+------------------------- ----------                                                                                    
+King                           24000                                                                                    
+Kochhar                        17000                                                                                    
+De Haan                        17000                                                                                    
+Lorentz                         4200                                                                                    
+Rajs                            3500                                                                                    
+Davies                          3100                                                                                    
+Matos                           2600                                                                                    
+Vargas                          2500                                                                                    
+Whalen                          4400                                                                                    
+Hartstein                      13000                                                                                    
+
+10 rows selected.
+
+
+<4>
+
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name,job_id,hire_date
+  2  from employees
+  3  where last_name IN('Matos','Taylor')
+  4* ORDER BY 3
+HR@orcl>/
+
+LAST_NAME                 JOB_ID     HIRE_DATE                                                                          
+------------------------- ---------- ---------                                                                          
+Matos                     ST_CLERK   15-MAR-98                                                                          
+Taylor                    SA_REP     24-MAR-98                                                                          
+
+<5>
+HR@orcl>SELECT last_name,department_id
+  2  from employees
+  3  where department_id IN(20,50)
+  4  ORDER BY 1;
+
+LAST_NAME                 DEPARTMENT_ID                                                                                 
+------------------------- -------------                                                                                 
+Davies                               50                                                                                 
+Fay                                  20                                                                                 
+Hartstein                            20                                                                                 
+Matos                                50                                                                                 
+Mourgos                              50                                                                                 
+Rajs                                 50                                                                                 
+Vargas                               50                                                                                 
+
+7 rows selected.
+
+
+<6>
+
+HR@orcl>
+  1  SELECT last_name "Employee", salary "Monthly Salary"
+  2  from employees
+  3  Where salary between 5000 and 12000
+  4* and department_id IN(20,50)
+HR@orcl>/
+
+Employee                  Monthly Salary                                                                                
+------------------------- --------------                                                                                
+Fay                                 6000                                                                                
+Mourgos                             5800                                                                                
+
+
+<7>
+HR@orcl>SELECT last_name, hire_date
+  2  from employees
+  3  where hire_date LIKE '%94';
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+Higgins                   07-JUN-94                                                                                     
+Gietz                     07-JUN-94                                                                                     
+
+
+<8>
+HR@orcl>SELECT last_name, job_id
+  2  from employees
+  3  WHERE manager_id IS NULL;
+
+LAST_NAME                 JOB_ID                                                                                        
+------------------------- ----------                                                                                    
+King                      AD_PRES                                                                                       
+
+
+<9>
+HR@orcl>SELECT last_name,salary,commission_pct
+  2  from employees
+  3  where commission_pct IS NOT NULL
+  4  ORDER BY salary desc,commission_pct desc;
+
+LAST_NAME                     SALARY COMMISSION_PCT                                                                     
+------------------------- ---------- --------------                                                                     
+Abel                           11000             .3                                                                     
+Zlotkey                        10500             .2                                                                     
+Taylor                          8600             .2                                                                     
+Grant                           7000            .15                                                                     
+
+<10>
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name
+  2  FROM employees
+  3* WHERE last_name LIKE '  a%'
+HR@orcl>/
+
+no rows selected
+
+<11>
+HR@orcl>SELECT last_name
+  2  from employees
+  3  where last_name like '%a%'
+  4  and last_name like '%e%';
+
+LAST_NAME                                                                                                               
+-------------------------                                                                                               
+Davies                                                                                                                  
+De Haan                                                                                                                 
+Hartstein                                                                                                               
+Whalen                                                                                                                  
+
+<12>
+HR@orcl>SELECT last_name, job_id,salary
+  2  from employees
+  3  WHERE job_id IN('SA_REP','ST_CLERK')
+  4  AND salary NOT IN(2500,3500,7000);
+
+LAST_NAME                 JOB_ID         SALARY                                                                         
+------------------------- ---------- ----------                                                                         
+Abel                      SA_REP          11000                                                                         
+Taylor                    SA_REP           8600                                                                         
+Davies                    ST_CLERK         3100                                                                         
+Matos                     ST_CLERK         2600                                                                         
+
+
+<13>
+HR@orcl>SELECT last_name,salary,commission_pct
+  2  from employees
+  3  WHERE commission_pct = 0.2;
+
+LAST_NAME                     SALARY COMMISSION_PCT                                                                     
+------------------------- ---------- --------------                                                                     
+Zlotkey                        10500             .2                                                                     
+Taylor                          8600             .2                                                                     
+
+
+Practice 3
+
+
+<1>
+HR@orcl>select sysdate"DATE" from dual;
+
+DATE                                                                                                                    
+---------                                                                                                               
+24-JAN-18                                                                                                               
+
+
+<2>
+HR@orcl>SELECT employee_id,last_name,salary,ROUND(salary*1.15,0)"NEW SALARY"
+  2  from employees;
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY                                                             
+----------- ------------------------- ---------- ----------                                                             
+        100 King                           24000      27600                                                             
+        101 Kochhar                        17000      19550                                                             
+        102 De Haan                        17000      19550                                                             
+        103 Hunold                          9000      10350                                                             
+        104 Ernst                           6000       6900                                                             
+        107 Lorentz                         4200       4830                                                             
+        124 Mourgos                         5800       6670                                                             
+        141 Rajs                            3500       4025                                                             
+        142 Davies                          3100       3565                                                             
+        143 Matos                           2600       2990                                                             
+        144 Vargas                          2500       2875                                                             
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY                                                             
+----------- ------------------------- ---------- ----------                                                             
+        149 Zlotkey                        10500      12075                                                             
+        174 Abel                           11000      12650                                                             
+        176 Taylor                          8600       9890                                                             
+        178 Grant                           7000       8050                                                             
+        200 Whalen                          4400       5060                                                             
+        201 Hartstein                      13000      14950                                                             
+        202 Fay                             6000       6900                                                             
+        205 Higgins                        12000      13800                                                             
+        206 Gietz                           8300       9545                                                             
+
+20 rows selected.
+
+HR@orcl>save lab03_02.sql
+Created file lab03_02.sql
+HR@orcl>spool off

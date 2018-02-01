@@ -1,0 +1,412 @@
+<3>
+HR@orcl>@lab03_02.sql
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY                                                             
+----------- ------------------------- ---------- ----------                                                             
+        100 King                           24000      27600                                                             
+        101 Kochhar                        17000      19550                                                             
+        102 De Haan                        17000      19550                                                             
+        103 Hunold                          9000      10350                                                             
+        104 Ernst                           6000       6900                                                             
+        107 Lorentz                         4200       4830                                                             
+        124 Mourgos                         5800       6670                                                             
+        141 Rajs                            3500       4025                                                             
+        142 Davies                          3100       3565                                                             
+        143 Matos                           2600       2990                                                             
+        144 Vargas                          2500       2875                                                             
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY                                                             
+----------- ------------------------- ---------- ----------                                                             
+        149 Zlotkey                        10500      12075                                                             
+        174 Abel                           11000      12650                                                             
+        176 Taylor                          8600       9890                                                             
+        178 Grant                           7000       8050                                                             
+        200 Whalen                          4400       5060                                                             
+        201 Hartstein                      14300      16445                                                             
+        202 Fay                             6600       7590                                                             
+        205 Higgins                        12000      13800                                                             
+        206 Gietz                           8300       9545                                                             
+        114 Raphealy                       11000      12650                                                             
+        115 Dean                           11000      12650                                                             
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY                                                             
+----------- ------------------------- ---------- ----------                                                             
+        113 Popp                           12000      13800                                                             
+
+23 rows selected.
+
+<4>
+HR@orcl>ed lab03_02.sql
+
+HR@orcl>@lab03_02.sql
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY   Increase                                                  
+----------- ------------------------- ---------- ---------- ----------                                                  
+        100 King                           24000      27600       3600                                                  
+        101 Kochhar                        17000      19550       2550                                                  
+        102 De Haan                        17000      19550       2550                                                  
+        103 Hunold                          9000      10350       1350                                                  
+        104 Ernst                           6000       6900        900                                                  
+        107 Lorentz                         4200       4830        630                                                  
+        124 Mourgos                         5800       6670        870                                                  
+        141 Rajs                            3500       4025        525                                                  
+        142 Davies                          3100       3565        465                                                  
+        143 Matos                           2600       2990        390                                                  
+        144 Vargas                          2500       2875        375                                                  
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY   Increase                                                  
+----------- ------------------------- ---------- ---------- ----------                                                  
+        149 Zlotkey                        10500      12075       1575                                                  
+        174 Abel                           11000      12650       1650                                                  
+        176 Taylor                          8600       9890       1290                                                  
+        178 Grant                           7000       8050       1050                                                  
+        200 Whalen                          4400       5060        660                                                  
+        201 Hartstein                      14300      16445       2145                                                  
+        202 Fay                             6600       7590        990                                                  
+        205 Higgins                        12000      13800       1800                                                  
+        206 Gietz                           8300       9545       1245                                                  
+        114 Raphealy                       11000      12650       1650                                                  
+        115 Dean                           11000      12650       1650                                                  
+
+EMPLOYEE_ID LAST_NAME                     SALARY NEW SALARY   Increase                                                  
+----------- ------------------------- ---------- ---------- ----------                                                  
+        113 Popp                           12000      13800       1800                                                  
+
+23 rows selected.
+
+
+<5>
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name,LENGTH(last_name)
+  2  FROM employees
+  3  WHERE last_name LIKE 'A%'
+  4  OR last_name LIKE 'M%'
+  5  OR last_name LIKE 'J%'
+  6* ORDER BY last_name
+HR@orcl>/
+
+LAST_NAME                 LENGTH(LAST_NAME)                                                                             
+------------------------- -----------------                                                                             
+Abel                                      4                                                                             
+Matos                                     5                                                                             
+Mourgos                                   7                                                                             
+
+
+<6>
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name,ROUND(MONTHS_BETWEEN(SYSDATE,hire_date),0) MONTHS_WORKED
+  2  FROM employees
+  3* ORDER BY 2
+HR@orcl>/
+
+LAST_NAME                 MONTHS_WORKED                                                                                 
+------------------------- -------------                                                                                 
+Dean                               -973                                                                                 
+Popp                                  0                                                                                 
+Zlotkey                             216                                                                                 
+Mourgos                             218                                                                                 
+Grant                               224                                                                                 
+Raphealy                            227                                                                                 
+Lorentz                             228                                                                                 
+Vargas                              235                                                                                 
+Matos                               238                                                                                 
+Taylor                              238                                                                                 
+Fay                                 245                                                                                 
+
+LAST_NAME                 MONTHS_WORKED                                                                                 
+------------------------- -------------                                                                                 
+Davies                              252                                                                                 
+Abel                                260                                                                                 
+Hartstein                           263                                                                                 
+Rajs                                267                                                                                 
+Higgins                             284                                                                                 
+Gietz                               284                                                                                 
+De Haan                             300                                                                                 
+Ernst                               320                                                                                 
+Hunold                              337                                                                                 
+Kochhar                             340                                                                                 
+Whalen                              364                                                                                 
+
+LAST_NAME                 MONTHS_WORKED                                                                                 
+------------------------- -------------                                                                                 
+King                                367                                                                                 
+
+23 rows selected.
+
+
+<7>
+HR@orcl>
+  1  SELECT last_name,LPAD(salary,15,'$') SALARY
+  2* FROM employees
+HR@orcl>/
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+King                      $$$$$$$$$$24000                                                                               
+Kochhar                   $$$$$$$$$$17000                                                                               
+De Haan                   $$$$$$$$$$17000                                                                               
+Hunold                    $$$$$$$$$$$9000                                                                               
+Ernst                     $$$$$$$$$$$6000                                                                               
+Lorentz                   $$$$$$$$$$$4200                                                                               
+Mourgos                   $$$$$$$$$$$5800                                                                               
+Rajs                      $$$$$$$$$$$3500                                                                               
+Davies                    $$$$$$$$$$$3100                                                                               
+Matos                     $$$$$$$$$$$2600                                                                               
+Vargas                    $$$$$$$$$$$2500                                                                               
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+Zlotkey                   $$$$$$$$$$10500                                                                               
+Abel                      $$$$$$$$$$11000                                                                               
+Taylor                    $$$$$$$$$$$8600                                                                               
+Grant                     $$$$$$$$$$$7000                                                                               
+Whalen                    $$$$$$$$$$$4400                                                                               
+Hartstein                 $$$$$$$$$$14300                                                                               
+Fay                       $$$$$$$$$$$6600                                                                               
+Higgins                   $$$$$$$$$$12000                                                                               
+Gietz                     $$$$$$$$$$$8300                                                                               
+Raphealy                  $$$$$$$$$$11000                                                                               
+Dean                      $$$$$$$$$$11000                                                                               
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+Popp                      $$$$$$$$$$12000                                                                               
+
+23 rows selected.
+
+
+<8>
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name,trunc((sysdate-hire_date)/7) AS TENURE
+  2  FROM employees
+  3  WHERE department_id = 90
+  4* ORDER BY 2 desc
+  5  /
+
+LAST_NAME                     TENURE                                                                                    
+------------------------- ----------                                                                                    
+King                            1597                                                                                    
+Kochhar                         1479                                                                                    
+De Haan                         1306                                                                                    
+
+
+
+Practice 4
+
+<1>
+
+HR@orcl>
+  1  SELECT last_name || ' earns ' || TO_CHAR(salary, 'fm$99,999.00') || ' monthly but wants ' ||
+  2   TO_CHAR(salary*3, 'fm$99,999.00') Dream_Salaries
+  3* from employees
+HR@orcl>/
+
+DREAM_SALARIES                                                                                                          
+-------------------------------------------------------------------------                                               
+King earns $24,000.00 monthly but wants $72,000.00                                                                      
+Kochhar earns $17,000.00 monthly but wants $51,000.00                                                                   
+De Haan earns $17,000.00 monthly but wants $51,000.00                                                                   
+Hunold earns $9,000.00 monthly but wants $27,000.00                                                                     
+Ernst earns $6,000.00 monthly but wants $18,000.00                                                                      
+Lorentz earns $4,200.00 monthly but wants $12,600.00                                                                    
+Mourgos earns $5,800.00 monthly but wants $17,400.00                                                                    
+Rajs earns $3,500.00 monthly but wants $10,500.00                                                                       
+Davies earns $3,100.00 monthly but wants $9,300.00                                                                      
+Matos earns $2,600.00 monthly but wants $7,800.00                                                                       
+Vargas earns $2,500.00 monthly but wants $7,500.00                                                                      
+
+DREAM_SALARIES                                                                                                          
+-------------------------------------------------------------------------                                               
+Zlotkey earns $10,500.00 monthly but wants $31,500.00                                                                   
+Abel earns $11,000.00 monthly but wants $33,000.00                                                                      
+Taylor earns $8,600.00 monthly but wants $25,800.00                                                                     
+Grant earns $7,000.00 monthly but wants $21,000.00                                                                      
+Whalen earns $4,400.00 monthly but wants $13,200.00                                                                     
+Hartstein earns $14,300.00 monthly but wants $42,900.00                                                                 
+Fay earns $6,600.00 monthly but wants $19,800.00                                                                        
+Higgins earns $12,000.00 monthly but wants $36,000.00                                                                   
+Gietz earns $8,300.00 monthly but wants $24,900.00                                                                      
+Raphealy earns $11,000.00 monthly but wants $33,000.00                                                                  
+Dean earns $11,000.00 monthly but wants $33,000.00                                                                      
+
+DREAM_SALARIES                                                                                                          
+-------------------------------------------------------------------------                                               
+Popp earns $12,000.00 monthly but wants $36,000.00                                                                      
+
+23 rows selected.
+
+
+<2>
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name, LPAD(salary,15,'$') SALARY
+  2* from employees
+  3  /
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+King                      $$$$$$$$$$24000                                                                               
+Kochhar                   $$$$$$$$$$17000                                                                               
+De Haan                   $$$$$$$$$$17000                                                                               
+Hunold                    $$$$$$$$$$$9000                                                                               
+Ernst                     $$$$$$$$$$$6000                                                                               
+Lorentz                   $$$$$$$$$$$4200                                                                               
+Mourgos                   $$$$$$$$$$$5800                                                                               
+Rajs                      $$$$$$$$$$$3500                                                                               
+Davies                    $$$$$$$$$$$3100                                                                               
+Matos                     $$$$$$$$$$$2600                                                                               
+Vargas                    $$$$$$$$$$$2500                                                                               
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+Zlotkey                   $$$$$$$$$$10500                                                                               
+Abel                      $$$$$$$$$$11000                                                                               
+Taylor                    $$$$$$$$$$$8600                                                                               
+Grant                     $$$$$$$$$$$7000                                                                               
+Whalen                    $$$$$$$$$$$4400                                                                               
+Hartstein                 $$$$$$$$$$14300                                                                               
+Fay                       $$$$$$$$$$$6600                                                                               
+Higgins                   $$$$$$$$$$12000                                                                               
+Gietz                     $$$$$$$$$$$8300                                                                               
+Raphealy                  $$$$$$$$$$11000                                                                               
+Dean                      $$$$$$$$$$11000                                                                               
+
+LAST_NAME                 SALARY                                                                                        
+------------------------- ------------------------------------------------------------                                  
+Popp                      $$$$$$$$$$12000                                                                               
+
+23 rows selected.
+
+
+<3>
+HR@orcl>
+  1  SELECT last_name,hire_date,TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date,6),'MONDAY'),
+  2  'fmDay,"the" Ddspth "of" month, YYYY') REVIEW
+  3* FROM employees
+HR@orcl>/
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+King                      17-JUN-87                                                                                     
+Monday,the Twenty-First of december, 1987                                                                               
+                                                                                                                        
+Kochhar                   21-SEP-89                                                                                     
+Monday,the Twenty-Sixth of march, 1990                                                                                  
+                                                                                                                        
+De Haan                   13-JAN-93                                                                                     
+Monday,the Nineteenth of july, 1993                                                                                     
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Hunold                    03-JAN-90                                                                                     
+Monday,the Ninth of july, 1990                                                                                          
+                                                                                                                        
+Ernst                     21-MAY-91                                                                                     
+Monday,the Twenty-Fifth of november, 1991                                                                               
+                                                                                                                        
+Lorentz                   07-FEB-99                                                                                     
+Monday,the Ninth of august, 1999                                                                                        
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Mourgos                   16-NOV-99                                                                                     
+Monday,the Twenty-Second of may, 2000                                                                                   
+                                                                                                                        
+Rajs                      17-OCT-95                                                                                     
+Monday,the Twenty-Second of april, 1996                                                                                 
+                                                                                                                        
+Davies                    29-JAN-97                                                                                     
+Monday,the Fourth of august, 1997                                                                                       
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Matos                     15-MAR-98                                                                                     
+Monday,the Twenty-First of september, 1998                                                                              
+                                                                                                                        
+Vargas                    09-JUL-98                                                                                     
+Monday,the Eleventh of january, 1999                                                                                    
+                                                                                                                        
+Zlotkey                   29-JAN-00                                                                                     
+Monday,the Thirty-First of july, 2000                                                                                   
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Abel                      11-MAY-96                                                                                     
+Monday,the Eighteenth of november, 1996                                                                                 
+                                                                                                                        
+Taylor                    24-MAR-98                                                                                     
+Monday,the Twenty-Eighth of september, 1998                                                                             
+                                                                                                                        
+Grant                     24-MAY-99                                                                                     
+Monday,the Twenty-Ninth of november, 1999                                                                               
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Whalen                    17-SEP-87                                                                                     
+Monday,the Twenty-First of march, 1988                                                                                  
+                                                                                                                        
+Hartstein                 17-FEB-96                                                                                     
+Monday,the Nineteenth of august, 1996                                                                                   
+                                                                                                                        
+Fay                       17-AUG-97                                                                                     
+Monday,the Twenty-Third of february, 1998                                                                               
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Higgins                   07-JUN-94                                                                                     
+Monday,the Twelfth of december, 1994                                                                                    
+                                                                                                                        
+Gietz                     07-JUN-94                                                                                     
+Monday,the Twelfth of december, 1994                                                                                    
+                                                                                                                        
+Raphealy                  02-MAR-99                                                                                     
+Monday,the Sixth of september, 1999                                                                                     
+                                                                                                                        
+
+LAST_NAME                 HIRE_DATE                                                                                     
+------------------------- ---------                                                                                     
+REVIEW                                                                                                                  
+-----------------------------------------------------------------------------------------------------                   
+Dean                      02-MAR-99                                                                                     
+Monday,the Seventh of september, 2099                                                                                   
+                                                                                                                        
+Popp                      25-JAN-18                                                                                     
+Monday,the Thirtieth of july, 2018                                                                                      
+                                                                                                                        
+
+23 rows selected.
+
+HR@orcl>ed
+Wrote file afiedt.buf
+
+  1  SELECT last_name,hire_date,TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date,6),'MONDAY'),
+  2  'fmDay,"the" Ddspth "of" month, YYYY') REVIEW
+  3* FROM employees
+HR@orcl>spool off
